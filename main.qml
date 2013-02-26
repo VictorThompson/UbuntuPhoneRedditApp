@@ -7,34 +7,34 @@ import "javascript.js" as Js
 
 
 Rectangle {
-	id: mainrectangle
+    id: mainrectangle
 
-	property bool landscape: false
+    property bool landscape: false
 
-	width: (landscape)? 800: 480
-	height: (landscape)? 480: 800
+    width: (landscape)? 800: 480
+    height: (landscape)? 480: 800
 
-	color: Js.getBackgroundColor()
+    color: Js.getBackgroundColor()
 
-	Tabs {
-		anchors.fill: parent
-		ItemStyle.class: "new-tabs"
+    Tabs {
+        anchors.fill: parent
+        ItemStyle.class: "new-tabs"
 
-		selectedTabIndex: 1 // skip the settings page
+        selectedTabIndex: 1 // skip the settings page
 
-		SettingsTab {}
+        SettingsTab {}
 
-//		Bugged in ubuntu components 0.1
-//		Repeater {
-//			model: ["/", "/r/ubuntuphone"] // should become a function fetching from the database
-//			delegate: SubredditTab {
-//				url: modelData
-//			}
-//		}
+        //		Bugged in ubuntu components 0.1
+        //		Repeater {
+        //			model: ["/", "/r/ubuntuphone"] // should become a function fetching from the database
+        //			delegate: SubredditTab {
+        //				url: modelData
+        //			}
+        //		}
 
-		SubredditTab {} // reddit.com
-		SubredditTab {url: "/r/all"} // reddit.com/r/all
-		SubredditTab {url: "/r/funny"}
-		SubredditTab {url: "/r/waterporn"}
-	}
+        SubredditTab {} // reddit.com
+        SubredditTab {url: "/r/all"} // reddit.com/r/all
+        SubredditTab {url: "/r/funny"}
+        SubredditTab {url: "/r/waterporn"}
+    }
 }
