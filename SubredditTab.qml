@@ -156,7 +156,7 @@ Tab {
 
                                             Image {
                                                 anchors.fill: parent
-                                                source: "upvoteEmpty.png"
+                                                source: (model.data.likes === true) ? "upvote.png" : "upvoteEmpty.png"
                                                 fillMode: Image.Stretch
                                             }
                                         }
@@ -167,7 +167,7 @@ Tab {
                                             onClicked: {
                                                 var http = new XMLHttpRequest()
                                                 var url = "https://ssl.reddit.com/api/vote";
-                                                var params = "dir=1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
+                                                var params = "dir=1&id="+model.data.name+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
                                                 http.open("POST", url, true);
                                                 console.log(params)
 
@@ -190,6 +190,7 @@ Tab {
                                                 }
                                                 http.send(params);
                                                 console.log("Upvoted!")
+                                                parent.Image.source = "upvote.png"
                                             }
                                         }
                                     }
@@ -263,7 +264,7 @@ Tab {
                                             anchors.right: parent.right
 
                                             Image {
-                                                source: "downvoteEmpty.png"
+                                                source: (model.data.likes === false) ?  "downvote.png" : "downvoteEmpty.png"
                                                 fillMode: Image.Stretch
                                                 anchors.fill: parent
                                             }
@@ -275,7 +276,7 @@ Tab {
                                             onClicked: {
                                                 var http = new XMLHttpRequest()
                                                 var url = "https://ssl.reddit.com/api/vote";
-                                                var params = "dir=-1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
+                                                var params = "dir=-1&id="+model.data.name+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
                                                 http.open("POST", url, true);
                                                 console.log(params)
 
