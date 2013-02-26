@@ -166,7 +166,7 @@ Tab {
                                             enabled: itemflipable.flipped
                                             onClicked: {
                                                 var http = new XMLHttpRequest()
-                                                var url = "http://www.reddit.com/api/vote";
+                                                var url = "https://ssl.reddit.com/api/vote";
                                                 var params = "dir=1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
                                                 http.open("POST", url, true);
                                                 console.log(params)
@@ -274,7 +274,7 @@ Tab {
                                             enabled: itemflipable.flipped
                                             onClicked: {
                                                 var http = new XMLHttpRequest()
-                                                var url = "http://www.reddit.com/api/vote";
+                                                var url = "https://ssl.reddit.com/api/vote";
                                                 var params = "dir=-1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
                                                 http.open("POST", url, true);
                                                 console.log(params)
