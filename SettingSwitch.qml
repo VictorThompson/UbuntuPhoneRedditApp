@@ -4,14 +4,14 @@ import Ubuntu.Components 0.1
 import "storage.js" as Storage
 
 Switch {
-	property string name: ""
+    property string name: ""
 
-	anchors.top: parent.top
-	anchors.bottom: parent.bottom
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
 
-	onCheckedChanged: Storage.setSetting(name, "" + checked)
+    onCheckedChanged: Storage.setSetting(name, "" + checked)
 
-	function loadValue () {
-		checked = (Storage.getSetting(name) == "true") ? true : false
-	}
+    function loadValue () {
+        checked = (Storage.getSetting(name) == "true") ? true : false
+    }
 }
