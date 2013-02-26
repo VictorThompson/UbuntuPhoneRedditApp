@@ -164,7 +164,33 @@ Tab {
 										MouseArea {
 											anchors.fill:parent
 											enabled: itemflipable.flipped
-											onClicked: console.log("Upvoted!")
+                                            onClicked: {
+                                                var http = new XMLHttpRequest()
+                                                var url = "http://www.reddit.com/api/vote";
+                                                var params = "dir=1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
+                                                http.open("POST", url, true);
+                                                console.log(params)
+
+                                                // Send the proper header information along with the request
+                                                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                http.setRequestHeader("Content-length", params.length);
+                                                http.setRequestHeader("User-Agent", "Ubuntu Phone Reddit App 0.1")
+                                                http.setRequestHeader("Connection", "close");
+
+                                                http.onreadystatechange = function() {
+                                                            if (http.readyState == 4) {
+                                                                if (http.status == 200) {
+                                                                    console.log("ok")
+                                                                    console.log(http.responseText)
+                                                                    var jsonresponse = JSON.parse(http.responseText)
+                                                                } else {
+                                                                    console.log("error: " + http.status)
+                                                                }
+                                                            }
+                                                        }
+                                                http.send(params);
+                                                console.log("Upvoted!")
+                                            }
 										}
 									}
 
@@ -246,7 +272,33 @@ Tab {
 										MouseArea {
 											anchors.fill: parent
 											enabled: itemflipable.flipped
-											onClicked: console.log("Downvoted!")
+                                            onClicked: {
+                                                var http = new XMLHttpRequest()
+                                                var url = "http://www.reddit.com/api/vote";
+                                                var params = "dir=-1&id="+model.data.id+"&uh="+Storage.getSetting("userhash")+"&api_type=json";
+                                                http.open("POST", url, true);
+                                                console.log(params)
+
+                                                // Send the proper header information along with the request
+                                                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                http.setRequestHeader("Content-length", params.length);
+                                                http.setRequestHeader("User-Agent", "Ubuntu Phone Reddit App 0.1")
+                                                http.setRequestHeader("Connection", "close");
+
+                                                http.onreadystatechange = function() {
+                                                            if (http.readyState == 4) {
+                                                                if (http.status == 200) {
+                                                                    console.log("ok")
+                                                                    console.log(http.responseText)
+                                                                    var jsonresponse = JSON.parse(http.responseText)
+                                                                } else {
+                                                                    console.log("error: " + http.status)
+                                                                }
+                                                            }
+                                                        }
+                                                http.send(params);
+                                                console.log("Downvoted!")
+                                            }
 										}
 									}
 								}

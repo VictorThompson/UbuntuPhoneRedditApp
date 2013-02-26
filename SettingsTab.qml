@@ -205,14 +205,15 @@ Tab {
 				width: parent.width
 				onClicked: {
                     var http = new XMLHttpRequest()
-                    var url = "http://www.reddit.com/api/login";
-                    var params = "user="+Storage.getSetting("accountname", text)+"&passwd="+Storage.getSetting("password", text)+"&api_type=json";
+                    var url = "https://ssl.reddit.com/api/login";
+                    var params = "user="+Storage.getSetting("accountname")+"&passwd="+Storage.getSetting("password")+"&api_type=json";
                     http.open("POST", url, true);
                     console.log(params)
 
                     // Send the proper header information along with the request
                     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     http.setRequestHeader("Content-length", params.length);
+                    http.setRequestHeader("User-Agent", "Ubuntu Phone Reddit App 0.1")
                     http.setRequestHeader("Connection", "close");
 
                     http.onreadystatechange = function() {
@@ -220,6 +221,9 @@ Tab {
                                     if (http.status == 200) {
                                         console.log("ok")
                                         console.log(http.responseText)
+                                        var jsonresponse = JSON.parse(http.responseText)
+                                        // store this user mod hash to pass to later api methods that require you to be logged in
+                                        Storage.setSetting("userhash", jsonresponse["json"]["data"]["modhash"])
                                     } else {
                                         console.log("error: " + http.status)
                                     }
