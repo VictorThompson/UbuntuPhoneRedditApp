@@ -303,7 +303,8 @@ Tab {
                                                 http.send(params);
                                                 console.log("Downvoted!")
                                                 downvote.source = (downvote.source.toString().match(".*downvote.png$")) ? "downvoteEmpty.png" : "downvote.png"
-                                                upvote.source = "upvoteEmpty.png"                                            }
+                                                upvote.source = "upvoteEmpty.png"
+                                            }
                                         }
                                     }
                                 }
