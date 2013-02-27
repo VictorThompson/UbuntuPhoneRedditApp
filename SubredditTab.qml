@@ -78,7 +78,7 @@ Tab {
                             onClicked: {
                                 flipable.flipped = true
                                 backside.commentpage = false
-                                backside.urlviewing = model.data.url
+                                webview.url = model.data.url
                             }
                             enabled: !flipable.flipped
                         }
@@ -155,6 +155,7 @@ Tab {
                                             anchors.left: parent.left
 
                                             Image {
+                                                id: upvote
                                                 anchors.fill: parent
                                                 source: (model.data.likes === true) ? "upvote.png" : "upvoteEmpty.png"
                                                 fillMode: Image.Stretch
@@ -190,7 +191,8 @@ Tab {
                                                 }
                                                 http.send(params);
                                                 console.log("Upvoted!")
-                                                parent.Image.source = "upvote.png"
+                                                upvote.source = (upvote.source.toString().match(".*upvote.png$")) ? "upvoteEmpty.png" : "upvote.png"
+                                                downvote.source = "downvoteEmpty.png"
                                             }
                                         }
                                     }
@@ -264,6 +266,7 @@ Tab {
                                             anchors.right: parent.right
 
                                             Image {
+                                                id: downvote
                                                 source: (model.data.likes === false) ?  "downvote.png" : "downvoteEmpty.png"
                                                 fillMode: Image.Stretch
                                                 anchors.fill: parent
@@ -299,7 +302,8 @@ Tab {
                                                 }
                                                 http.send(params);
                                                 console.log("Downvoted!")
-                                            }
+                                                downvote.source = (downvote.source.toString().match(".*downvote.png$")) ? "downvoteEmpty.png" : "downvote.png"
+                                                upvote.source = "upvoteEmpty.png"                                            }
                                         }
                                     }
                                 }
